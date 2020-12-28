@@ -11,15 +11,17 @@ import (
 
 func main() {
 	app := gearbox.New()
-	app.Use(func(ctx gearbox.Context) {
-		ctx.Set("Access-Control-Allow-Origin", "*")
-		ctx.Next()
-	})
-	app.Post("/upload", upload)
+	app.Use(middlewareCors)
+	app.Post("/upload", handlerUpload)
 	app.Start("localhost:8090")
 }
 
-func upload(ctx gearbox.Context) {
+func middlewareCors(ctx gearbox.Context) {
+	ctx.Set("Access-Control-Allow-Origin", "*")
+	ctx.Next()
+}
+
+func handlerUpload(ctx gearbox.Context) {
 	h, e := ctx.Context().FormFile("image")
 	if e != nil {
 		ctx.SendString(e.Error())
