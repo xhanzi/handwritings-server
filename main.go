@@ -12,7 +12,7 @@ import (
 func main() {
 	app := gearbox.New()
 	app.Use(middlewareCors)
-	app.Post("/upload", handlerUpload)
+	app.Post("/api/upload", handlerUpload)
 	app.Start("127.0.0.1:8090")
 }
 
