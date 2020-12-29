@@ -11,9 +11,9 @@ import (
 
 func main() {
 	app := gearbox.New()
-	app.Use(middlewareCors)
+	// app.Use(middlewareCors)
 	app.Post("/api/upload", handlerUpload)
-	app.Start("127.0.0.1:8090")
+	app.Start(":8090")
 }
 
 func middlewareCors(ctx gearbox.Context) {
